@@ -1,0 +1,305 @@
+/* Main CSS */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #316E7D;
+  margin: 0;
+   display: grid; /* Menggunakan CSS Grid untuk layout utama */
+  place-items: center; /* Pusatkan konten secara vertikal dan horizontal */
+  min-height: 100vh;
+  font-size: 15px;
+}
+
+#container {
+  background-color: #141E24;
+  border-radius: 8px;
+  box-shadow: 0px 10px 15px 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  width: 827px;
+  height: 600px;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
+#list-header {
+  display: flex;
+  align-items: left;
+  justify-content: left;
+}
+
+form {
+  display: grid;
+  gap: 10px;
+}
+
+#note-text {
+  width: auto;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+#btn-submit {
+  padding: 10px;
+  background-color: #316E7D;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#btn-submit:hover {
+  background-color: #6fb0c1;
+}
+
+.loading-indicator {
+  display: none; /* Sembunyikan secara default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* Warna latar belakang semi-transparent */
+  z-index: 9999; /* Pastikan indikator loading berada di atas elemen lain */
+  /* Tambahkan properti lain sesuai kebutuhan */
+}
+
+.blankDiv {
+  background-color: #fff;
+  border: none;
+  padding: 20px;
+  border-radius: 8px;
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#addNoteDiv {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#addNoteDiv:hover {
+  transition: 0.25s;
+  background-color: #f1f1f1;
+}
+
+
+#addNoteDiv i {
+  font-size: 50px;
+  color: gainsboro;
+}
+
+/* List CSS */
+#list-container {
+  display: grid; /* Menggunakan CSS Grid untuk layout daftar catatan */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Menyusun item dengan lebar minimum 200px */
+  gap: 20px; /* Jarak antar item */
+  justify-items: center; /* Pusatkan item secara horizontal */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+li {
+  background-color: #fff385;
+  margin: 5px 0;
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* Added to align buttons to the right */
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow:  5px 5px 5px #b3b3b3;
+}
+
+li span {
+  font-size: 12px;
+  flex-grow: 1;
+  word-wrap: break-word;
+  overflow-y: scroll;
+}
+
+#editBtn,
+#deleteBtn {
+  background-color: #6fb0c1;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px; /* Adjusted margin for spacing */
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  width: 60px;
+}
+
+#editBtn {
+  background-color: grey;
+}
+
+#deleteBtn:hover {
+  background-color: #316E7D;
+}
+
+#editBtn:hover {
+  background-color: #141E24;
+}
+
+
+/* Create Note Popup CSS */
+#popupContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 300px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+textarea {
+  width: 300px;
+  height: 200px;
+  margin: 10px 0;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 2px solid #316E7D;
+}
+
+#btn-container {
+  display: flex;
+}
+
+#submitBtn, #closeBtn {
+  width: 100px;
+  background-color: #316E7D;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#closeBtn {
+  background-color: grey;
+}
+
+
+/* Editing Popup CSS */
+#editing-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 300px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+#submitBtn, #closeBtn {
+  width: 100px;
+  background-color: #316E7D;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#closeBtn {
+  background-color: grey;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px; /* Contoh penggunaan unit relatif untuk lebar maksimum */
+}
+
+/* Untuk layar kecil */
+@media only screen and (max-width: 600px) {
+  .container {
+      grid-template-columns: 1fr; /* Mengubah menjadi satu kolom untuk layar kecil */
+  }
+}
+h1 {
+  font-size: 2rem; /* Ukuran font relatif */
+}
+
+/* Untuk layar kecil */
+@media only screen and (max-width: 600px) {
+  h1 {
+      font-size: 1.5rem; /* Ukuran font yang lebih kecil */
+  }
+}
+/* Default: Semua elemen ditampilkan */
+.hide-on-small {
+  display: block;
+}
+
+/* Untuk layar kecil: Elemen disembunyikan */
+@media only screen and (max-width: 600px) {
+  .hide-on-small {
+      display: none;
+  }
+}
+.element {
+  max-width: 100%; /* Elemen tidak akan melebihi lebar parent-nya */
+}
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+}
