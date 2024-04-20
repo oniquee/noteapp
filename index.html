@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Notes App</title>
+</head>
+<body>
+  <div id="container">
+    <app-header id="header-app">
+      <header>
+        <h1>My Notes App</h1>
+        <nav>
+            <a href="#newnotes">New Notes</a>
+            <a href="#completed">Completed</a>
+            <a href="#uncomplete">Uncomplete</a>
+        </nav>
+    </header>
+    </app-header>
+    <app-bar></app-bar>
+
+    <!-- indikator loading di bawah app-bar -->
+  <div id="loadingIndicator" class="loading-indicator">
+    <!-- Tambahkan ikon atau teks loading di sini -->
+    Loading...
+  </div>
+
+    <add-note-form>
+        <form id="addNoteForm">
+            <input type="text" id="noteTitle" placeholder="Title" required>
+            <textarea id="note-text" placeholder="Enter your note..." required></textarea>
+            <button id="btn-submit" type="submit">Add Note</button>
+        </form>
+    </add-note-form>
+
+    <div id="list-header">
+        <div id="addNoteDiv" onclick="popup()">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+    </div>
+    
+    <div id="list-container">
+        <ul id="notes-list">
+            <note-item>
+              <span slot="title">Judul Catatan 1</span>
+              <span slot="body">Isi Catatan 1</span>
+            </note-item>
+            <note-item>
+              <span slot="title">Judul Catatan 2</span>
+              <span slot="body">Isi Catatan 2</span>
+            </note-item>
+            <!-- Tambahan catatan lainnya -->
+          </ul>
+    </div>
+
+    <!-- Form Pop-up -->
+    <div id="popupContainer" style="display: none;">
+        <h1>New Note</h1>
+        <form id="noteForm">
+            <input type="text" id="popupNoteTitle" placeholder="Enter note title" required>
+            <textarea id="popupNoteText" placeholder="Enter your note..." required></textarea>
+            <div id="btn-container">
+                <button type="submit" id="popupBtnSubmit">Create Note</button>
+                <button type="button" id="popupCloseBtn" onclick="closePopup()">Close</button>
+            </div>
+        </form>
+    </div>
+    <div class="lds-dual-ring"></div>
+</body>
+</html>
