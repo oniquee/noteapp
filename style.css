@@ -9,6 +9,32 @@ body {
   font-size: 15px;
 }
 
+/*header*/
+header {
+  background-color: #316E7D;
+  color: #fff;
+  padding: 25px;
+  text-align: center;
+  border-radius: 8px;
+}
+h1 {
+  margin: 0;
+  font-size: 30px;
+}
+nav {
+  margin-top: 10px;
+  font-size: 15px
+}
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+nav a:hover {
+  text-decoration: none;
+  color: #fff385;
+}
+
 #container {
   background-color: #141E24;
   border-radius: 8px;
@@ -61,6 +87,7 @@ textarea {
   background-color: #6fb0c1;
 }
 
+/*loading indicator*/
 .loading-indicator {
   display: none; /* Sembunyikan secara default */
   position: fixed;
@@ -71,6 +98,39 @@ textarea {
   background-color: rgba(255, 255, 255, 0.5); /* Warna latar belakang semi-transparent */
   z-index: 9999; /* Pastikan indikator loading berada di atas elemen lain */
   /* Tambahkan properti lain sesuai kebutuhan */
+}
+
+.lds-dual-ring {
+  /* change color here */
+  color: #1c4c5b
+}
+.lds-dual-ring,
+.lds-dual-ring:after {
+  box-sizing: border-box;
+}
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6.4px solid currentColor;
+  border-color: currentColor transparent currentColor transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .blankDiv {
