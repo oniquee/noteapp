@@ -7,7 +7,16 @@
 </head>
 <body>
   <div id="container">
-    <app-header id="header-app"></app-header>
+    <app-header id="header-app">
+      <header>
+        <h1>My Notes App</h1>
+        <nav>
+            <a href="#newnotes">New Notes</a>
+            <a href="#completed">Completed</a>
+            <a href="#uncomplete">Uncomplete</a>
+        </nav>
+    </header>
+    </app-header>
     <app-bar></app-bar>
 
     <!-- indikator loading di bawah app-bar -->
@@ -56,5 +65,6 @@
             </div>
         </form>
     </div>
+    <div class="lds-dual-ring"></div>
 </body>
 </html>
