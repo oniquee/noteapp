@@ -1,4 +1,7 @@
 import "./style.css";
+import "./note-item";
+import "./add-note-form";
+
 
 function displayNotes() {
   const notesList = document.getElementById('notes-list');
