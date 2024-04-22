@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 //Mengirim POST untuk menambahkan catatan baru
-async function createNoteAPI(title, body) {
+export async function createNoteAPI(title, body) {
   const apiUrl = 'https://notes-api.dicoding.dev/v2/notes';
   const data = { title, body };
 
@@ -67,7 +67,7 @@ async function createNoteAPI(title, body) {
     console.log('New note ID:', responseData.data.id);
 
     // Refresh list after adding new note
-    displayNotes();
+    displayNotesAPI();
   } catch (error) {
     console.error('Error adding new note:', error.message);
   }
