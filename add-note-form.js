@@ -1,4 +1,5 @@
-// Custom Element: Add Note Form
+
+import "./script";// Custom Element: Add Note Form
 class AddNoteForm extends HTMLElement {
     constructor() {
       super();
@@ -77,12 +78,13 @@ class AddNoteForm extends HTMLElement {
   
       if (noteTitle !== '' && noteText !== '') { // Pastikan kedua nilai tidak kosong
         // Kirim event 'add-note' dengan detail data catatan
-        this.dispatchEvent(new CustomEvent('add-note', {
-          detail: {
-            title: noteTitle,
-            body: noteText
-          }
-        }));
+        // this.dispatchEvent(new CustomEvent('add-note', {
+        //   detail: {
+        //     title: noteTitle,
+        //     body: noteText
+        //   }
+        // }));
+        createNoteAPI(noteTitle, noteText);
   
         // Kosongkan input setelah catatan dibuat
         this.shadowRoot.getElementById('noteTitle').value = '';
