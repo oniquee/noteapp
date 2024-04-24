@@ -35,6 +35,10 @@ async function displayNotesAPI() {
     noteItem.innerHTML = `
       <span slot="title">${note.title}</span>
       <span slot="body">${note.body}</span>
+      <div id="noteBtns-container">
+            <button id="editBtn" onclick="editNote(${note.id})"><i class="fa-solid fa-pen"></i></button>
+            <button id="deleteBtn" onclick="deleteNote(${note.id})"><i class="fa-solid fa-trash"></i></button>
+        </div>
     `;
     notesList.appendChild(noteItem);
   });
@@ -74,24 +78,51 @@ export async function createNoteAPI(title, body) {
 }
 
 //Mengirim DELETE untuk menghapus catatan
-async function deleteNoteById(noteId) {
-  const apiUrl = `https://notes-api.dicoding.dev/v2/notes/${noteId}`;
-
+async function deleteNote(noteId) {
   try {
-    const response = await fetch(apiUrl, {
-      method: 'DELETE',
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to delete note.');
-    }
-
-    // Refresh list after deleting note
-    displayNotes();
+    await deleteNoteById(noteId); // Panggil fungsi deleteNoteById untuk menghapus catatan dari server
+    displayNotesAPI(); // Refresh daftar catatan setelah menghapus
   } catch (error) {
     console.error('Error deleting note:', error.message);
   }
 }
+
+document.addEventListener('click', async (event) => {
+  const target = event.target;
+  if (target.matches('#deleteBtn')) {
+    const noteId = target.closest('li').dataset.id;
+    await deleteNote(noteId);
+  }
+});
+
+
+// const deleteButtonElements = document.querySelectorAll('.btn-delete');
+//     deleteButtonElements.forEach((button) => {
+//       button.addEventListener('click', (event) => {
+//         const bookId = event.target.dataset.id;
+
+//         removeBook(bookId);
+//       });
+//     });
+
+function deleteNoteAPI(noteId) {
+      let notes = JSON.parse(localStorage.getItem('notes')) || [];
+      notes = notes.filter(note => note.id !== noteId);
+  
+      localStorage.setItem('notes', JSON.stringify(notes));
+      displayNotes();
+  }
+
+  createBtn.addEventListener("click", ()=> {
+    let inputBox = document.createElement("p");
+    let img = document.createElement("img");
+    inputBox.className = "input-box";
+    inputBox.setAttribute('contenteditable', 'true');
+    img.src = "img/delete.png";
+    notesContainer.appendChild(inputBox).appendChild(img);
+
+})
+  
 
 // Menambahkan event listener untuk form dari AddNoteForm
 document.addEventListener('submit', async (event) => {
