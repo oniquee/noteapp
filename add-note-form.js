@@ -1,5 +1,5 @@
-
-import "./script";// Custom Element: Add Note Form
+import { createNoteAPI } from "./script.js";
+// Custom Element: Add Note Form
 class AddNoteForm extends HTMLElement {
     constructor() {
       super();
