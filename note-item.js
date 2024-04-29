@@ -1,7 +1,12 @@
 class NoteItem extends HTMLElement {
     constructor() {
         super();
+        this._note = {}
         this.attachShadow({ mode: 'open' });
+    }
+
+    setNote(value) {
+        this._note = value
     }
 
     connectedCallback() {
@@ -58,17 +63,32 @@ class NoteItem extends HTMLElement {
             </style>
             <li>
             <h3><slot name="title">
-            ${this.getAttribute('title')}
+            ${this._note.title}
             </slot></h3>
             <p><slot name="body">
-            ${this.getAttribute('body')}
+            ${this._note.body}
             </slot></p>
             <div id="noteBtns-container">
-                <button id="editBtn"><i class="fa-solid fa-pen"></i></button>
-                <button id="deleteBtn"><i class="fa-solid fa-trash"></i></button>
+                <button id="editBtn">Edit<i class="fa-solid fa-pen"></i></button>
+                <button id="deleteBtn">Delete<i class="fa-solid fa-trash"></i></button>
             </div>
         </li>
         `;
+
+        const deleteButton = this.shadowRoot.querySelector('#deleteBtn')
+        deleteButton.addEventListener('click', async () => {
+        console.log('Deleting note with ID', this._note.id);
+        await deleteNoteAPI(this._note.id); // Panggil fungsi deleteNoteAPI dengan ID catatan
+
+        // Setelah penghapusan berhasil, panggil displayNotesAPI untuk memperbarui tampilan daftar catatan
+        displayNotesAPI();
+        })
+
+        const editButton = this.shadowRoot.querySelector('#editBtn')
+        editButton.addEventListener('click', () => {
+            console.log('Edit note with ID')
+            // TODO : Edit note from API
+        })
     }
 }
 
