@@ -1,3 +1,5 @@
+import { deleteNoteAPI, displayNotesAPI } from "./script.js";
+
 class NoteItem extends HTMLElement {
     constructor() {
         super();
@@ -77,18 +79,17 @@ class NoteItem extends HTMLElement {
 
         const deleteButton = this.shadowRoot.querySelector('#deleteBtn')
         deleteButton.addEventListener('click', async () => {
-        console.log('Deleting note with ID', this._note.id);
-        await deleteNoteAPI(this._note.id); // Panggil fungsi deleteNoteAPI dengan ID catatan
+            console.log('Deleting note with ID', this._note.id);
+            await deleteNoteAPI(this._note.id); // Panggil fungsi deleteNoteAPI dengan ID catatan
 
-        // Setelah penghapusan berhasil, panggil displayNotesAPI untuk memperbarui tampilan daftar catatan
-        displayNotesAPI();
-        })
-
+            // Setelah penghapusan berhasil, panggil displayNotesAPI untuk memperbarui tampilan daftar catatan
+            await displayNotesAPI();
+        });
         const editButton = this.shadowRoot.querySelector('#editBtn')
         editButton.addEventListener('click', () => {
             console.log('Edit note with ID')
             // TODO : Edit note from API
-        })
+        });
     }
 }
 
