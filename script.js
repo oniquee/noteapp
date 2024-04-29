@@ -2,7 +2,6 @@ import "./style.css";
 import "./note-item";
 import "./add-note-form";
 
-
 function displayNotes() {
   const notesList = document.getElementById('notes-list');
   notesList.innerHTML = '';
@@ -28,18 +27,11 @@ function displayNotes() {
 async function displayNotesAPI() {
   const notesList = document.getElementById('notes-list');
   notesList.innerHTML = '';
-
   const notesData = await fetchNotesAPI();
+
   notesData.forEach(note => {
     const noteItem = document.createElement('note-item');
-    noteItem.innerHTML = `
-      <span slot="title">${note.title}</span>
-      <span slot="body">${note.body}</span>
-      <div id="noteBtns-container">
-            <button id="editBtn" onclick="editNote(${note.id})"><i class="fa-solid fa-pen"></i></button>
-            <button id="deleteBtn" onclick="deleteNote(${note.id})"><i class="fa-solid fa-trash"></i></button>
-        </div>
-    `;
+    noteItem.setNote(note)
     notesList.appendChild(noteItem);
   });
 }
@@ -78,22 +70,42 @@ export async function createNoteAPI(title, body) {
 }
 
 //Mengirim DELETE untuk menghapus catatan
-async function deleteNote(noteId) {
+// async function deleteNote(noteId) {
+//   try {
+//     await deleteNoteById(noteId); // Panggil fungsi deleteNoteById untuk menghapus catatan dari server
+//     displayNotesAPI(); // Refresh daftar catatan setelah menghapus
+//   } catch (error) {
+//     console.error('Error deleting note:', error.message);
+//   }
+// }
+
+// document.addEventListener('click', async (event) => {
+//   const target = event.target;
+//   if (target.matches('#deleteBtn')) {
+//     const noteId = target.closest('li').dataset.id;
+//     await deleteNote(noteId);
+//   }
+// });
+
+//Mengirim DELETE untuk menghapus catatan
+export async function deleteNoteAPI(noteId) {
+  const apiUrl = `https://notes-api.dicoding.dev/v2/notes/${noteId}`;
+
   try {
-    await deleteNoteById(noteId); // Panggil fungsi deleteNoteById untuk menghapus catatan dari server
+    const response = await fetch(apiUrl, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to delete note.');
+    }
+
+    console.log('Note deleted successfully:', noteId);
     displayNotesAPI(); // Refresh daftar catatan setelah menghapus
   } catch (error) {
     console.error('Error deleting note:', error.message);
   }
 }
-
-document.addEventListener('click', async (event) => {
-  const target = event.target;
-  if (target.matches('#deleteBtn')) {
-    const noteId = target.closest('li').dataset.id;
-    await deleteNote(noteId);
-  }
-});
 
 
 // const deleteButtonElements = document.querySelectorAll('.btn-delete');
@@ -105,23 +117,23 @@ document.addEventListener('click', async (event) => {
 //       });
 //     });
 
-function deleteNoteAPI(noteId) {
-      let notes = JSON.parse(localStorage.getItem('notes')) || [];
-      notes = notes.filter(note => note.id !== noteId);
+// function deleteNoteAPI(noteId) {
+//       let notes = JSON.parse(localStorage.getItem('notes')) || [];
+//       notes = notes.filter(note => note.id !== noteId);
   
-      localStorage.setItem('notes', JSON.stringify(notes));
-      displayNotes();
-  }
+//       localStorage.setItem('notes', JSON.stringify(notes));
+//       displayNotes();
+//   }
 
-  createBtn.addEventListener("click", ()=> {
-    let inputBox = document.createElement("p");
-    let img = document.createElement("img");
-    inputBox.className = "input-box";
-    inputBox.setAttribute('contenteditable', 'true');
-    img.src = "img/delete.png";
-    notesContainer.appendChild(inputBox).appendChild(img);
+//   createBtn.addEventListener("click", ()=> {
+//     let inputBox = document.createElement("p");
+//     let img = document.createElement("img");
+//     inputBox.className = "input-box";
+//     inputBox.setAttribute('contenteditable', 'true');
+//     img.src = "img/delete.png";
+//     notesContainer.appendChild(inputBox).appendChild(img);
 
-})
+// })
   
 
 // Menambahkan event listener untuk form dari AddNoteForm
